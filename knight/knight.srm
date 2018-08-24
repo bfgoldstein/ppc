@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH -J 18-intel
+#SBATCH -n 1
+
+#export OMP_NUM_THREADS=1
+#export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+#export I_MPI_FABRICS=dapl
+
+#srun --cpu_bind=verbose -n 3 ./<EXEC>
+srun time -p ./knight < input > output
