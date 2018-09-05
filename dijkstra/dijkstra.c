@@ -6,7 +6,7 @@
 static unsigned long int next = 1;
 
 int my_rand(void) {
-	return ((next = next * 1103515245 + 12345) % ((u_long) RAND_MAX + 1));
+	return ((next = next * 1103515245 + 12345) % ((long) RAND_MAX + 1));
 }
 
 void my_srand(unsigned int seed) {

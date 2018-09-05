@@ -1,11 +1,24 @@
-CC =icpc 
-CPPFLAGS = -g #-m32
 
-all: roots_of_a_forest.cpp
-	$(CC) $(CPPFLAGS) -o roots_of_a_forest roots_of_a_forest.cpp
+FLAGS=-O3
 
-run: roots_of_a_forest problem_input
-	./roots_of_a_forest problem_input problem_output
+DEBUGFLAGS = -g
+
+CXX=g++
+
+RM=rm -f
+
+EXEC=roots_of_a_forest
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -o $(EXEC)$(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) problem_input problem_output
 
 clean:
-	rm -rfv roots_of_a_forest roots_of_a_forest.dSYM problem_output
+	$(RM) $(EXEC).o $(EXEC)

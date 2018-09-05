@@ -1,19 +1,25 @@
-FLAGS=-O2
+FLAGS=-O3
 
-CC=icc
+DEBUGFLAGS = -g
+
+CC=gcc
 
 RM=rm -f
 
 EXEC=dna
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) dna.c -c -o dna.o
-	$(CC) $(FLAGS) dna.o -o $(EXEC)
+all: $(EXEC).c
+	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
-	./$(EXEC)
+debug: $(EXEC).c
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC) dna.in
+	./$(EXEC) < dna.in
 
 clean:
-	$(RM) dna.o $(EXEC)
+	$(RM) $(EXEC).o $(EXEC)

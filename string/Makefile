@@ -1,10 +1,26 @@
-.PHONY = all clean test mpp
+FLAGS=-O3 -std=c++11 -Wall -Wextra
 
-all : spec
+DEBUGFLAGS = -g
 
-clean :
-	rm -rf spec *dSYM*
+CXX=g++
 
-spec : spec.cc spec.hh
-	g++ -std=c++11 -Wall -Wextra -O3 spec.cc -o spec
+CC=gcc
+
+RM=rm -f
+
+EXEC=spec
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cc $(EXEC).hh
+	$(CXX) $(FLAGS) $(EXEC).cc -o $(EXEC)
+
+debug: $(EXEC).cc $(EXEC).hh
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cc -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < spec.in
+
+clean:
+	$(RM) $(EXEC).o $(EXEC)
 

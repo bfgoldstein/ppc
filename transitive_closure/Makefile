@@ -1,9 +1,25 @@
-FLAGS=-O3
+FLAGS=-O3 
 
-all: transitive_closure
+DEBUGFLAGS = -g
 
-transitive_closure: transitive_closure.c
-	$(CC) $(FLAGS) transitive_closure.c -o transitive_closure
+CC=gcc
+
+RM=rm -f
+
+EXEC=transitive_closure
+
+.PHONY : all clean debug run
+
+all: $(EXEC).c
+	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
+
+debug: $(EXEC).c
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC) transitive_closure.in
+	./$(EXEC) < transitive_closure.in
 
 clean:
-	rm transitive_closure
+	$(RM) *.o $(EXEC)

@@ -1,3 +1,0 @@
-#$ -S /bin/sh
-
-./smooth

@@ -1,4 +1,6 @@
-FLAGS=-O2
+FLAGS=-O3
+
+DEBUGFLAGS = -g
 
 CC=gcc
 
@@ -6,13 +8,16 @@ RM=rm -f
 
 EXEC=haar
 
-all: $(EXEC)
-
-$(EXEC):
+all: $(EXEC).c
 	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
 	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
+
+debug: $(EXEC).c
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
 	./$(EXEC)
 
 clean:

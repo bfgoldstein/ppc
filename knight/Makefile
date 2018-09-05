@@ -1,19 +1,25 @@
 FLAGS=-O3
 
-CC=icpc
+DEBUGFLAGS = -g
+
+CCX=gcc
 
 RM=rm -f
 
 EXEC=knight
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
-	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
+all: $(EXEC).cpp
+	$(CCX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CCX) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
-	./$(EXEC)
+debug: $(EXEC).cpp
+	$(CCX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CCX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < input > output
 
 clean:
 	$(RM) $(EXEC).o $(EXEC)

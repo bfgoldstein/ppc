@@ -1,14 +1,30 @@
-CC = icpc
-CPPFLAGS = -g #-m32
+FLAGS=-O3
 
-all: pagerank.cpp
-	$(CC) $(CPPFLAGS) -o pagerank pagerank.cpp
+LIBS=-lm
 
-run: pagerank problem_input
-	./pagerank problem_input problem_output
+DEBUGFLAGS = -g
+
+CXX=g++
+
+RM=rm -f
+
+EXEC=pagerank
+
+.PHONY : all clean debug run check_output
+
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC) $(LIBS)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC) $(LIBS)
+
+run: $(EXEC)
+	./$(EXEC) problem_input problem_output
 
 check_output: check_output.cpp
-	$(CC) $(CPPFLAGS) -o check_output check_output.cpp
+	$(CXX) $(FLAGS) -o check_output check_output.cpp
 
 clean:
-	rm -rfv pagerank pagerank.dSYM problem_output check_output check_output.dSYM
+	$(RM) $(EXEC).o $(EXEC) check_output

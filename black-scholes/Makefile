@@ -1,18 +1,24 @@
 FLAGS=-O3
 
-CC=icpc
+DEBUGFLAGS = -g
+
+CXX=gcc
 
 RM=rm -f
 
 EXEC=black-scholes
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
-	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
+all: $(EXEC).cpp $(EXEC).h
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
 
-run:
+debug: $(EXEC).cpp $(EXEC).h
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
 	./$(EXEC)
 
 clean:

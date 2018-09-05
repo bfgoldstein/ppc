@@ -1,4 +1,6 @@
-FLAGS=-O2
+FLAGS=-O3
+
+DEBUGFLAGS = -g
 
 CC=gcc
 
@@ -6,14 +8,19 @@ RM=rm -f
 
 EXEC=bucketsort
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
+all: $(EXEC).c main.c bucketsort.h
 	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
 	$(CC) $(FLAGS) main.c -c -o main.o
 	$(CC) $(FLAGS) main.o $(EXEC).o -o $(EXEC)
 
-run:
+debug: $(EXEC).c main.c bucketsort.h
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) main.c -c -o main.o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) main.o $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
 	./$(EXEC)
 
 clean:

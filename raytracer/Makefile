@@ -1,16 +1,23 @@
 FLAGS=-O3
 
-CXX=icpc
+CXX=g++
 
 RM=rm -f
 
 EXEC=raytracer
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
+all: $(EXEC).cpp
 	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
 	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < raytracer.in
 
 clean:
 	$(RM) $(EXEC).o $(EXEC)

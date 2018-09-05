@@ -1,11 +1,25 @@
-CC =icpc 
-CPPFLAGS = -g #-m32
+FLAGS=-O3
 
-all: heap.cpp
-	$(CC) $(CPPFLAGS) -o heap heap.cpp
+DEBUGFLAGS = -g
 
-run: heap problem_input
-	./heap problem_input problem_output
+CXX =gcc 
+
+RM=rm -f
+
+EXEC=heap
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) problem_input problem_output
 
 clean:
-	rm -rfv heap heap.dSYM problem_output
+	$(RM) $(EXEC).o $(EXEC)

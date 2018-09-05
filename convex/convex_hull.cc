@@ -1,6 +1,6 @@
 #include"convex_hull.hh"
 #include<deque>
-#include<ext/algorithm>
+//#include<ext/algorithm>
 #include<iostream>
 #include<set>
 using namespace std;

@@ -1,19 +1,34 @@
-FLAGS=-O2
+FLAGS=-O3
 
-CC=icpc
+DEBUGFLAGS = -g
+
+CXX=g++
+
+CC=gcc
 
 RM=rm -f
 
 EXEC=radix
 
-all: $(EXEC)
+IN_EXEC=radix-generate
 
-$(EXEC):
-	$(CC) $(FLAGS) radix.cpp -c -o radix.o
-	$(CC) $(FLAGS) radix.o -o $(EXEC)
+.PHONY : all clean debug run generator clean_generator
 
-run:
-	./$(EXEC)
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -o $(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < radix.in
 
 clean:
-	$(RM) radix.o $(EXEC)
+	$(RM) $(EXEC).o $(EXEC)
+
+generator: $(IN_EXEC).c
+	$(CC) $(FLAGS) $(IN_EXEC).c -c -o $(IN_EXEC).o
+	$(CC) $(FLAGS) $(IN_EXEC).o -o $(IN_EXEC)
+
+clean_generator:
+	$(RM) $(IN_EXEC).o $(IN_EXEC) radix.in

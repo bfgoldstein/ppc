@@ -4,12 +4,14 @@
 #include <deque>
 #include <string>
 
+typedef unsigned int  uint;
+
 using namespace std;
 
 class bigdecimal {
 private:
 	deque<int> *digits;
-	uint places, dot;
+	int places, dot;
 	int signal;
 
 	bigdecimal() {

@@ -1,17 +1,27 @@
-CC =icpc 
-CPPFLAGS = -g -m32
+FLAGS=-O3 -m32
 
-all: main.o puzzle.o 
-	$(CC) $(CPPFLAGS) -o bbound main.o puzzle.o
+LIBS=-lm
 
-main: main.cpp
-	$(CC) $(CPPFLAGS) -c main.cpp
+DEBUGFLAGS = -g
 
-puzzle: puzzle.cpp puzzle.h
-	$(CC) $(CPPFLAGS) -c puzzle.cpp
+CXX=g++
 
-run: bbound problem_input
-	./bbound problem_input
+RM=rm -f
+
+EXEC=puzzle
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cpp $(EXEC).h main.cpp 
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) main.cpp $(EXEC).o -o $(EXEC) $(LIBS)
+
+debug: $(EXEC).cpp $(EXEC).h main.cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) main.cpp $(EXEC).o -o $(EXEC) $(LIBS)
+
+run: $(EXEC)
+	./$(EXEC) < puzzle.in
 
 clean:
-	rm *.o bbound problem_output
+	$(RM) $(EXEC).o $(EXEC)

@@ -1,11 +1,23 @@
-CC = icpc
-CPPFLAGS = -g #-m32
+FLAGS=-O3
 
-all: sieve.cpp
-	$(CC) $(CPPFLAGS) -o sieve sieve.cpp
+DEBUGFLAGS = -g
 
-run: sieve problem_input
-	./sieve problem_input
+CXX=g++
+
+RM=rm -f
+
+EXEC=sieve
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -o $(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < sieve.in
 
 clean:
-	rm sieve problem_output
+	$(RM) $(EXEC).o $(EXEC)

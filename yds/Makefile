@@ -1,18 +1,24 @@
-FLAGS=-O3 --c++11
+FLAGS=-O3 -std=c++11
 
-CC=pgCC
+DEBUGFLAGS = -g
+
+CXX=g++
 
 RM=rm -f
 
 EXEC=yds
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
-	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
+debug: $(EXEC).cpp 
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
 	./$(EXEC)
 
 clean:

@@ -1,11 +1,25 @@
-CC = icpc
-CPPFLAGS = -g
+FLAGS=-O3
 
-all: median.cpp
-	$(CC) $(CPPFLAGS) -o median median.cpp
+DEBUGFLAGS = -g
 
-run: median problem_input
-	./median problem_input
+CXX=g++
+
+RM=rm -f
+
+EXEC=median
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < median.in
 
 clean:
-	rm median problem_output
+	$(RM) $(EXEC).o $(EXEC)

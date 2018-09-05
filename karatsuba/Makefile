@@ -1,16 +1,25 @@
 FLAGS=-O3
 
-CXX=icpc
+DEBUGFLAGS = -g
+
+CXX=gcc
 
 RM=rm -f
 
 EXEC=karatsuba
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
+all: $(EXEC).cc
 	$(CXX) $(FLAGS) $(EXEC).cc -c -o $(EXEC).o
 	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
+
+debug: $(EXEC).cc
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cc -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC)
 
 clean:
 	$(RM) $(EXEC).o $(EXEC)

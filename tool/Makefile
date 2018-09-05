@@ -1,19 +1,25 @@
-FLAGS=-O2
+FLAGS=-O3
 
-CC=icpc
+DEBUGFLAGS = -g
+
+CXX=g++
 
 RM=rm -f
 
 EXEC=tool
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) tool.cpp -c -o tool.o
-	$(CC) $(FLAGS) tool.o -o $(EXEC)
+all: $(EXEC).cpp 
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
-	./$(EXEC)
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < tool.in
 
 clean:
-	$(RM) tool.o $(EXEC)
+	$(RM) $(EXEC).o $(EXEC)

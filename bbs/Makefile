@@ -1,4 +1,4 @@
-CXX = icpc
+CXX = gcc
 
 CXXFLAGS = -strict-ansi
 
@@ -8,16 +8,21 @@ OPTFLAGS = -O3 -g0
 
 LDFLAGS = -lm
 
+RM=rm -f
+
 EXEC = bbs
 
-.PHONY : all clean
+.PHONY : all clean debug run
 
-all : $(EXEC).cpp
+all: $(EXEC).cpp
 	$(CXX) $(CXXFLAGS) $(OPTFLAGS) $(EXEC).cpp -o $(EXEC)
 
-debug : $(EXEC).cpp
+debug: $(EXEC).cpp
 	$(CXX) $(CXXFLAGS) $(DEBUGFLAGS) $(EXEC).cpp -o $(EXEC)
 
-clean :
-	rm -rf *.o *.out $(EXEC)
+run: $(EXEC)
+	./$(EXEC) < input > output
+
+clean:
+	$(RM) *.o *.out $(EXEC)
 

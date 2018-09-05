@@ -1,19 +1,25 @@
-FLAGS=-O2
+FLAGS=-O3
 
-CC=icc
+DEBUGFLAGS = -g
+
+CC=gcc
 
 RM=rm -f
 
 EXEC=fib
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) fib.c -c -o fib.o
-	$(CC) $(FLAGS) fib.o -o $(EXEC)
+all: $(EXEC).c
+	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
-	./$(EXEC) < input
+debug: $(EXEC).c
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC) fib.in
+	./$(EXEC) < fib.in
 
 clean:
-	$(RM) fib.o $(EXEC)
+	$(RM) $(EXEC).o $(EXEC)

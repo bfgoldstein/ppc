@@ -1,11 +1,25 @@
-CC =icpc 
-CPPFLAGS = -g #-m32
+FLAGS=-O3
 
-all: clustering_coefficient.cpp
-	$(CC) $(CPPFLAGS) -o clustering_coefficient clustering_coefficient.cpp
+DEBUGFLAGS = -g
 
-run: clustering_coefficient problem_input
-	./clustering_coefficient problem_input problem_output
+CXX=gcc
+
+RM=rm -f
+
+EXEC=clustering_coefficient
+
+.PHONY : all clean debug run
+
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
+
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) problem_input problem_output
 
 clean:
-	rm -rfv clustering_coefficient clustering_coefficient.dSYM problem_output
+	$(RM) $(EXEC).o $(EXEC)

@@ -1,29 +1,25 @@
-NAME		=	kmeans    
-LD			=	$(CC)
-DEBUG		+=	#-DDEBUG
-CFLAGS		+=	-O3 -lm $(DEBUG)
-CXXFLAGS	+=	$(CFLAGS)
-LDFLAGS		+=
+FLAGS=-O3
 
-EXE			=	$(NAME)
-CFILES		=	$(wildcard *.c)
-CXXFILES	=	$(wildcard *.cpp)
-OBJECTS		=	$(CFILES:.c=.o) $(CXXFILES:.cpp=.o)
+DEBUGFLAGS = -g
 
-all : $(EXE)
-	@echo "Building..."
+CC=gcc
 
-$(EXE) : $(OBJECTS)
-	$(LD) $^ $(CFLAGS) $(LDFLAGS) -o $@
+RM=rm -f
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+EXEC=kmeans
 
-%.o : %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+.PHONY : all clean debug run
 
-clean :
-	rm -fr $(EXE) $(OBJECTS)
+all: $(EXEC).c
+	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run: $(EXE)
-	./$(EXE) < input.txt > output.txt
+debug: $(EXEC).c
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < input.txt > output.txt
+
+clean:
+	$(RM) $(EXEC).o $(EXEC)

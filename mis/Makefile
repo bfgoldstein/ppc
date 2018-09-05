@@ -1,18 +1,24 @@
 FLAGS=-O3 --std=c++11
 
-CC=g++
+DEBUGFLAGS = -g
+
+CXX=g++
 
 RM=rm -f
 
 EXEC=mis
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) $(EXEC).cc -c -o $(EXEC).o
-	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
+all: $(EXEC).cc
+	$(CXX) $(FLAGS) $(EXEC).cc -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
+debug: $(EXEC).cc
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cc -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
 	./$(EXEC)
 
 clean:

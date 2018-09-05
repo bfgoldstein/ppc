@@ -1,20 +1,27 @@
-FLAGS=-O2
+FLAGS=-O3
 
-CC=icpc
+CXX=g++
+
+DEBUGFLAGS = -g
 
 RM=rm -f
 
 EXEC=pi
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) bigdecimal.cpp -c -o bigdecimal.o
-	$(CC) $(FLAGS) pi.cpp -c -o pi.o
-	$(CC) $(FLAGS) bigdecimal.o pi.o main.cpp -o $(EXEC)
+all: $(EXEC).cpp main.cpp bigdecimal.cpp
+	$(CXX) $(FLAGS) bigdecimal.cpp -c -o bigdecimal.o
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) bigdecimal.o $(EXEC).o main.cpp -o $(EXEC)
+
+debug: $(EXEC).cpp main.cpp bigdecimal.cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) bigdecimal.cpp -c -o bigdecimal.o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) bigdecimal.o $(EXEC).o main.cpp -o $(EXEC)
 
 run:
-	./$(EXEC) < input
+	./$(EXEC) < pi_v1.in
 
 clean:
-	$(RM) pi.o bigdecimal.o $(EXEC)
+	$(RM) $(EXEC).o bigdecimal.o $(EXEC)

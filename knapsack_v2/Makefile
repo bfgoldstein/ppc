@@ -1,4 +1,4 @@
-FLAGS=-O2
+FLAGS=-O3
 
 CC=gcc
 
@@ -6,14 +6,18 @@ RM=rm -f
 
 EXEC=knapsack
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
+all: $(EXEC).c
 	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
 	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
 
-run:
-	./$(EXEC)
+debug: $(EXEC).c
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) $(DEBUGFLAGS) $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < knapsack_v2.in
 
 clean:
 	$(RM) $(EXEC).o $(EXEC)

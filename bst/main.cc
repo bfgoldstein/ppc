@@ -1,10 +1,16 @@
 #include"obst.hh"
 #include<iostream>
-#include<malloc.h>
 #include<sys/time.h>
 #include<time.h>
+
+#if defined(__MACH__)
+#include <stdlib.h>
+#else 
+#include <malloc.h>
+#endif
+
 using namespace std;
-int main(int argc,char* argv[],char* envp) try {
+int main(int argc,char* argv[],char** envp) try {
 	struct timeval timevalA;
 	struct timeval timevalB;
 

@@ -1,20 +1,27 @@
-FLAGS=-O2
+FLAGS=-O3
 
-CC=icpc
+DEBUGFLAGS = -g
+
+CXX=g++
 
 RM=rm -f
 
 EXEC=matrix
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
-	$(CC) $(FLAGS) main.cpp -c -o main.o
-	$(CC) $(FLAGS) main.o $(EXEC).o -o $(EXEC)
+all: $(EXEC).cpp main.cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) main.cpp -c -o main.o
+	$(CXX) $(FLAGS) main.o $(EXEC).o -o $(EXEC)
 
-run:
-	./$(EXEC)
+debug: $(EXEC).cpp main.cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -c -o $(EXEC).o
+	$(CXX) $(FLAGS) main.cpp -c -o main.o
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) main.o $(EXEC).o -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC) < matrix.in
 
 clean:
-	$(RM) main.o $(EXEC).o $(EXEC)
+	$(RM) $(EXEC).o $(EXEC)

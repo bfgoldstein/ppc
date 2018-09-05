@@ -1,7 +1,7 @@
 NAME		=       nbody
-CC		=	icc
-CXX		=	icpc
-LD		=	icc
+CC		=	gcc
+CXX		=	g++
+LD		=	gcc
 DEBUG		+=
 CFLAGS		+=	-O3 $(DEBUG)
 CXXFLAGS	+=	$(CFLAGS)

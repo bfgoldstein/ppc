@@ -1,18 +1,22 @@
 FLAGS=-O3
 
-CC=icpc
+CXX=g++
+
+DEBUGFLAGS = -g
 
 RM=rm -f
 
 EXEC=selection
 
-all: $(EXEC)
+.PHONY : all clean debug run
 
-$(EXEC):
-	$(CC) $(FLAGS) $(EXEC).cpp -c -o $(EXEC).o
-	$(CC) $(FLAGS) $(EXEC).o -o $(EXEC)
+all: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(EXEC).cpp -o $(EXEC)
 
-run:
+debug: $(EXEC).cpp
+	$(CXX) $(FLAGS) $(DEBUGFLAGS) $(EXEC).cpp -o $(EXEC)
+
+run: $(EXEC)
 	./$(EXEC)
 
 clean:
