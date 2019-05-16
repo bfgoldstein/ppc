@@ -1,6 +1,6 @@
 # Brazilian Parallel Programming Contest Codes
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bfgoldstein/ppc/LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bfgoldstein/ppc/blob/master/LICENSE)
 
 Check out the [contest website](http://lspd.mackenzie.br/marathon/current/index.html) for all the details like:
 
@@ -12,7 +12,7 @@ Check out the [contest website](http://lspd.mackenzie.br/marathon/current/index.
 
 ## License and Citation
 
-Brazilian Parallel Programming Contest Codes are released under the [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bfgoldstein/ppc/LICENSE).
+Brazilian Parallel Programming Contest Codes are released under the [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bfgoldstein/ppc/blob/master/LICENSE).
 
 Please cite PPC in your publication if it helped your research:
 
