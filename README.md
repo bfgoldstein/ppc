@@ -1,8 +1,8 @@
 # Brazilian Parallel Programming Contest Codes
 
-[![License]()](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bfgoldstein/ppc/LICENSE)
 
-Check out the [contest website](http://lspd.mackenzie.br/marathon/current/index.html) for all the details like
+Check out the [contest website](http://lspd.mackenzie.br/marathon/current/index.html) for all the details like:
 
 - Previous Contests
 - Rules
@@ -11,16 +11,17 @@ Check out the [contest website](http://lspd.mackenzie.br/marathon/current/index.
 - Committee
 - Contact
 
-
 ## License and Citation
 
-Brazilian Parallel Programming Contest Codes are released under the [XXX license](URL para o arquivo LICENSE).
+Brazilian Parallel Programming Contest Codes are released under the [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bfgoldstein/ppc/LICENSE).
 
-Please cite XXX in your publications if it helps your research:
+Please cite PPC in your publication if it helped your research:
 
-    @article{ppc,
+    @INPROCEEDINGS{ppc,
       Author = {Marzulo, Leandro and Bianchini, Calebe and Ferreira, Victor and Santiago, Leandro and Goldstein, Brunno and França, Felipe},
-      Journal = {},
+      Booktitle={2019 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW)},
       Title = {Teaching High Performance Computing through Parallel Programming Marathons},
-      Year = {2018}
+      Year = {2019},
+      pages={TBD},
+      doi={TBD}
     }
