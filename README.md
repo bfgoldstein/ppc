@@ -4,12 +4,11 @@
 
 Check out the [contest website](http://lspd.mackenzie.br/marathon/current/index.html) for all the details like:
 
-- Previous Contests
-- Rules
-- Registration
-- How to Study
-- Committee
-- Contact
+- [Previous Contests](http://lspd.mackenzie.br/marathon/old.html)
+- [Rules](http://lspd.mackenzie.br/marathon/current/rules.html)
+- [Registration](http://lspd.mackenzie.br/marathon/current/registration.html)
+- [How to Study](http://lspd.mackenzie.br/marathon/study.html)
+- [Contact](http://lspd.mackenzie.br/marathon/contact.html)
 
 ## License and Citation
 
